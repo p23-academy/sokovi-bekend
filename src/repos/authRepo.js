@@ -49,11 +49,28 @@ const loginUser = async (email, password) => {
     }
   }
   delete user.password
-  const token = jwt.sign({id: user.id}, JWT_SECRET)
+  const token = jwt.sign({id: user.id, email: user.email}, JWT_SECRET)
   return {
     user,
     token
   }
 }
 
-module.exports = {registerUser, loginUser}
+const verifyToken = async (token) => {
+  let decodedToken;
+  try {
+    decodedToken = await jwt.verify(token, JWT_SECRET)
+  } catch (error) {
+    throw {
+      code: "auth/invalid-token",
+    }
+  }
+  const email = decodedToken.email
+  const user = await getUserByEmail(email)
+  return {
+    user,
+    token
+  }
+}
+
+module.exports = {registerUser, loginUser, verifyToken}
