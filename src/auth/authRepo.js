@@ -1,7 +1,7 @@
 const {sql} = require("../db");
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const {getUserByEmail} = require("./usersRepo");
+const {getUserByEmail} = require("../users/usersRepo");
 
 const JWT_SECRET = "p23-akademija"
 

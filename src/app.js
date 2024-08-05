@@ -15,7 +15,7 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`)
 })
 
-app.post('/init', async (req, res) => {
+app.post('/api/v1/init', async (req, res) => {
   try {
     await initializePostgres()
     return res.status(200).json({})
@@ -25,4 +25,5 @@ app.post('/init', async (req, res) => {
   }
 });
 
-require('./api/authApi')(app)
+require('./auth/authApi')(app)
+require('./categories/categoriesApi')(app)

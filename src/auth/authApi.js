@@ -1,4 +1,4 @@
-const {registerUser, loginUser, verifyToken} = require("../repos/authRepo");
+const {registerUser, loginUser, verifyToken} = require("./authRepo");
 
 module.exports = function (app) {
   app.post('/api/v1/register', async (req, res) => {
